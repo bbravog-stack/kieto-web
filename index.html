@@ -36,7 +36,7 @@
     "closes": "17:00"
   }],
   "hasMap": "https://maps.app.goo.gl/Vh9Qiyk9g34GJAvc7",
-  "hasMenu": "https://kieto.mx/assets/menu-kieto-comida.pdf",
+  "hasMenu": "https://kieto.mx/#carta",
   "sameAs": ["https://www.instagram.com/kietorest/"]
 }
 </script>
@@ -126,6 +126,29 @@ section{padding:88px 0}
 .nota-incluido b{font-weight:800}
 .nota-incluido img{width:40px;flex-shrink:0}
 
+/* ===== Carta ===== */
+.carta{background:#fff}
+.tabs{display:flex;gap:12px;margin:36px 0 30px;flex-wrap:wrap}
+.tab-btn{font-family:'Alvara Sans',sans-serif;font-weight:700;font-size:1rem;padding:11px 28px;border-radius:999px;border:2px solid var(--olivo);background:transparent;color:var(--olivo);cursor:pointer;transition:all .15s ease}
+.tab-btn.act{background:var(--olivo);color:var(--lima)}
+.carta-panel{display:none}
+.carta-panel.act{display:block}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 56px}
+.mgroup{margin-bottom:28px}
+.mgroup h3{font-family:'IT Trivane',sans-serif;font-size:1.3rem;text-transform:uppercase;color:var(--terracota);margin-bottom:4px}
+.mgroup .sub{font-size:.86rem;opacity:.72;margin-bottom:10px}
+.mi{display:flex;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(46,55,18,.2)}
+.mi>div b{font-weight:700}
+.mi small{display:block;font-size:.82rem;opacity:.72;font-weight:400;line-height:1.45}
+.mi .sp{flex:1}
+.mi .mp{font-weight:700;white-space:nowrap}
+.combo{background:var(--masa-suave);border-radius:14px;padding:16px 20px;margin-top:12px}
+.combo b{display:block}
+.combo small{font-size:.88rem;opacity:.8}
+.combo .mp{float:right;font-weight:800;color:var(--terracota)}
+.carta-note{margin-top:24px;font-size:.85rem;opacity:.68}
+@media(max-width:920px){.mgrid{grid-template-columns:1fr}}
+
 /* ===== Favoritos ===== */
 .favs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
 .fav{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 12px rgba(46,55,18,.07);display:flex;flex-direction:column}
@@ -145,7 +168,10 @@ section{padding:88px 0}
 .rev-score .s{color:#F3C34C;font-size:1.2rem;letter-spacing:2px}
 .rev-score small{display:block;margin-top:6px;opacity:.85}
 .rev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:42px}
-.rev{background:#fff;border-radius:18px;padding:26px 28px;box-shadow:0 2px 10px rgba(46,55,18,.06)}
+.rev{background:#fff;border-radius:18px;padding:26px 28px;box-shadow:0 2px 10px rgba(46,55,18,.06);position:relative;transition:transform .15s ease,box-shadow .15s ease}
+.rev:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(46,55,18,.14)}
+.rev .lnk{position:absolute;inset:0;border-radius:18px}
+.rev footer em{font-style:normal;color:var(--terracota)}
 .rev .s{color:#F3C34C;letter-spacing:2px;font-size:.95rem}
 .rev p{margin:12px 0 14px;font-size:1rem}
 .rev footer{font-size:.88rem;font-weight:700;opacity:.75}
@@ -207,6 +233,7 @@ section{padding:88px 0}
     <ul>
       <li><a href="#concepto">El concepto</a></li>
       <li><a href="#menu">Cómo funciona</a></li>
+      <li><a href="#carta">Menú</a></li>
       <li><a href="#favoritos">Favoritos</a></li>
       <li><a href="#opiniones">Opiniones</a></li>
       <li><a class="btn small" href="https://maps.app.goo.gl/Vh9Qiyk9g34GJAvc7" target="_blank" rel="noopener">Cómo llegar</a></li>
@@ -288,10 +315,115 @@ section{padding:88px 0}
       <img src="assets/img/logo/simbolo-positivo.svg" alt="">
       <div>Armas el tuyo desde <b>$140</b>, con extras desde <b>$5</b> — y de tomar, <b>refill de aguas del día por $15</b>.</div>
     </div>
-    <div style="margin-top:28px;text-align:center;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-      <a class="btn ghost" href="assets/menu-kieto-comida.pdf" target="_blank" rel="noopener">Menú de comida (PDF)</a>
-      <a class="btn ghost" href="assets/menu-kieto-desayuno.pdf" target="_blank" rel="noopener">Menú de desayunos (PDF)</a>
+    <div style="margin-top:28px;text-align:center">
+      <a class="btn ghost" href="#carta">Ver el menú completo con precios</a>
     </div>
+  </div>
+</section>
+
+<!-- ===== CARTA ===== -->
+<section class="carta" id="carta">
+  <div class="wrap">
+    <span class="kicker">El menú</span>
+    <h2 class="h2">La carta completa</h2>
+    <p class="lead">Bowl con 150 g de proteína o wrap con pan pita fresco de masa madre. Precios en pesos.</p>
+    <div class="tabs">
+      <button class="tab-btn act" data-panel="panel-comida" type="button">Comida</button>
+      <button class="tab-btn" data-panel="panel-desayuno" type="button">Desayunos</button>
+    </div>
+
+    <div class="carta-panel act" id="panel-comida">
+      <div class="mgrid">
+        <div>
+          <div class="mgroup">
+            <h3>Elige</h3>
+            <p class="sub">Tu proteína, en bowl (150 g) o wrap (80 g)</p>
+            <div class="mi"><div><b>Falafel</b></div><span class="sp"></span><span class="mp">bowl $160 · wrap $140</span></div>
+            <div class="mi"><div><b>Pollo pastor</b></div><span class="sp"></span><span class="mp">bowl $170 · wrap $150</span></div>
+            <div class="mi"><div><b>Vacío chimichurri</b></div><span class="sp"></span><span class="mp">bowl $220 · wrap $180</span></div>
+            <div class="mi"><div><b>Salmón teriyaki</b></div><span class="sp"></span><span class="mp">bowl $250 · wrap $200</span></div>
+            <p class="sub" style="margin-top:8px">Extra 80 g de proteína: $45 a $90 según la proteína</p>
+          </div>
+          <div class="mgroup">
+            <h3>Salsita</h3>
+            <div class="mi"><div><b>Verde martajada</b></div><span class="sp"></span><span class="mp">+$5</span></div>
+            <div class="mi"><div><b>Yogurt griego con chipotle</b></div><span class="sp"></span><span class="mp">+$5</span></div>
+            <div class="mi"><div><b>Yogurt griego con eneldo</b></div><span class="sp"></span><span class="mp">+$5</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="mgroup">
+            <h3>Con</h3>
+            <p class="sub">Tu ensalada</p>
+            <div class="mi"><div><b>Mix de hojas</b></div><span class="sp"></span><span class="mp">+$20</span></div>
+            <div class="mi"><div><b>Quinoa</b></div><span class="sp"></span><span class="mp">+$25</span></div>
+            <div class="mi"><div><b>Asiática</b></div><span class="sp"></span><span class="mp">+$30</span></div>
+            <div class="mi"><div><b>Lechuga asada</b></div><span class="sp"></span><span class="mp">+$30</span></div>
+          </div>
+          <div class="mgroup">
+            <h3>Acompañado de</h3>
+            <div class="mi"><div><b>Verduras asadas</b></div><span class="sp"></span><span class="mp">+$10</span></div>
+            <div class="mi"><div><b>Papas Kieto</b></div><span class="sp"></span><span class="mp">+$10</span></div>
+            <div class="mi"><div><b>Papas de camote</b></div><span class="sp"></span><span class="mp">+$10</span></div>
+            <div class="mi"><div><b>Hummus del día</b></div><span class="sp"></span><span class="mp">+$10</span></div>
+            <div class="mi"><div><b>Panela de la Jefa</b></div><span class="sp"></span><span class="mp">+$20</span></div>
+            <div class="mi"><div><b>Jocoque con mix de chiles</b></div><span class="sp"></span><span class="mp">+$30</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carta-panel" id="panel-desayuno">
+      <div class="mgrid">
+        <div>
+          <div class="mgroup">
+            <h3>Prensados</h3>
+            <p class="sub">En croissant o wrap · desde las 9:00</p>
+            <div class="mi"><div><b>Huevos Kieto</b><small>Huevos revueltos con papas cambray, cebolla y queso</small></div><span class="sp"></span><span class="mp">croissant $100 · wrap $90</span></div>
+            <div class="mi"><div><b>Jamón y queso</b></div><span class="sp"></span><span class="mp">croissant $110 · wrap $100</span></div>
+            <div class="mi"><div><b>Pollo</b><small>Pollo y queso, con side de ensalada mix y salsa de chipotle</small></div><span class="sp"></span><span class="mp">croissant $130 · wrap $120</span></div>
+            <div class="mi"><div><b>Vacío toreado</b><small>Vacío con chiles toreados y queso, con side de ensalada mix y salsa de chipotle</small></div><span class="sp"></span><span class="mp">croissant $170 · wrap $160</span></div>
+          </div>
+          <div class="mgroup">
+            <h3>Combos</h3>
+            <div class="combo"><span class="mp">$110</span><b>Mañanero</b><small>Wrap de jamón y queso o de huevos Kieto + café de tu elección</small></div>
+            <div class="combo"><span class="mp">$90</span><b>Croissant</b><small>Croissant natural + café de tu elección</small></div>
+          </div>
+        </div>
+        <div>
+          <div class="mgroup">
+            <h3>Pan dulce</h3>
+            <div class="mi"><div><b>Croissant tradicional</b></div><span class="sp"></span><span class="mp">$45</span></div>
+            <div class="mi"><div><b>Concha</b></div><span class="sp"></span><span class="mp">$50</span></div>
+            <div class="mi"><div><b>Chocolatín</b></div><span class="sp"></span><span class="mp">$72</span></div>
+            <div class="mi"><div><b>Croissant de Nutella</b></div><span class="sp"></span><span class="mp">$75</span></div>
+            <div class="mi"><div><b>Roll de canela</b></div><span class="sp"></span><span class="mp">$82</span></div>
+            <div class="mi"><div><b>Roll de nuez</b></div><span class="sp"></span><span class="mp">$87</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid" style="margin-top:8px">
+      <div class="mgroup">
+        <h3>Bebidas</h3>
+        <div class="mi"><div><b>Refill de aguas del día</b></div><span class="sp"></span><span class="mp">$15</span></div>
+        <div class="mi"><div><b>Agua mineral</b></div><span class="sp"></span><span class="mp">$27</span></div>
+        <div class="mi"><div><b>Mineral saborizada</b></div><span class="sp"></span><span class="mp">$40</span></div>
+        <div class="mi"><div><b>Kombucha</b></div><span class="sp"></span><span class="mp">$50</span></div>
+        <div class="mi"><div><b>Soda Mate</b></div><span class="sp"></span><span class="mp">$70</span></div>
+      </div>
+      <div class="mgroup">
+        <h3>Café</h3>
+        <div class="mi"><div><b>Expreso doble</b></div><span class="sp"></span><span class="mp">$40</span></div>
+        <div class="mi"><div><b>Americano</b></div><span class="sp"></span><span class="mp">$50</span></div>
+        <div class="mi"><div><b>Capuchino</b></div><span class="sp"></span><span class="mp">$60</span></div>
+        <div class="mi"><div><b>Flat white</b></div><span class="sp"></span><span class="mp">$60</span></div>
+        <div class="mi"><div><b>Latte</b></div><span class="sp"></span><span class="mp">$65</span></div>
+      </div>
+    </div>
+
+    <p class="carta-note">Precios de julio 2026, sujetos a cambio. Versión imprimible: <a href="assets/menu-kieto-comida.pdf" target="_blank" rel="noopener" style="color:var(--terracota);font-weight:700;text-decoration:none">comida (PDF)</a> · <a href="assets/menu-kieto-desayuno.pdf" target="_blank" rel="noopener" style="color:var(--terracota);font-weight:700;text-decoration:none">desayunos (PDF)</a></p>
   </div>
 </section>
 
@@ -373,22 +505,26 @@ section{padding:88px 0}
       <article class="rev">
         <span class="s">★★★★★</span>
         <p>"Deliciosooo. Todo lo que he probado ha sido delicioso, desde desayuno hasta la comida. Comes sano y súper rico, quedas sintiéndote muy bien... 10/10."</p>
-        <footer>Fer Cueva · julio 2026 · Google Maps</footer>
+        <footer>Fer Cueva · julio 2026 · <em>Ver en Google Maps ↗</em></footer>
+        <a class="lnk" href="https://share.google/YfXIvermGjDw9j7Ru" target="_blank" rel="noopener" aria-label="Ver la reseña de Fer Cueva en Google Maps"></a>
       </article>
       <article class="rev">
         <span class="s">★★★★★</span>
         <p>"Muy buen sazón, buena porción, muy sabroso. Sin ruido: se puede platicar cómodamente. Agradable para grupos de 6 u 8 personas."</p>
-        <footer>Salvador Hernández · julio 2026 · Google Maps</footer>
+        <footer>Salvador Hernández · julio 2026 · <em>Ver en Google Maps ↗</em></footer>
+        <a class="lnk" href="https://share.google/Awwyfh3bJnhRbljMi" target="_blank" rel="noopener" aria-label="Ver la reseña de Salvador Hernández en Google Maps"></a>
       </article>
       <article class="rev">
         <span class="s">★★★★★</span>
         <p>"Muy rico todo, buenas porciones y excelente servicio. Sí es comida saludable de verdad, y los precios están muy bien."</p>
-        <footer>Diego Ibarra · julio 2026 · Google Maps</footer>
+        <footer>Diego Ibarra · julio 2026 · <em>Ver en Google Maps ↗</em></footer>
+        <a class="lnk" href="https://share.google/HhK9yNAELT1SwoO61" target="_blank" rel="noopener" aria-label="Ver la reseña de Diego Ibarra en Google Maps"></a>
       </article>
       <article class="rev">
         <span class="s">★★★★★</span>
         <p>"Kieto se ha convertido en mi lugar de comida favorito de la zona, y lo digo sin dudarlo. Trabajo en The Nook y cada vez que me quedo a comer en la oficina, es mi ÚNICA opción. Sano, rápido y delicioso."</p>
-        <footer>María José · junio 2026 · Google Maps</footer>
+        <footer>María José · junio 2026 · <em>Ver en Google Maps ↗</em></footer>
+        <a class="lnk" href="https://share.google/KI8k1XWPodVbQ2154" target="_blank" rel="noopener" aria-label="Ver la reseña de María José en Google Maps"></a>
       </article>
     </div>
     <div class="rev-cta">
@@ -404,7 +540,8 @@ section{padding:88px 0}
       <img src="assets/img/fotos/cafe-pan.jpg" alt="Concha y capuchino en Kieto" style="width:110px;height:110px;border-radius:50%;object-fit:cover;flex-shrink:0">
       <div>
         <h3>Y por la mañana...</h3>
-        <p>Prensados en croissant o wrap (prueba los huevos Kieto), pan dulce y café de especialidad. Combo Mañanero desde $110. Desde las 9:00.</p>
+        <p>Prensados en croissant o wrap, pan dulce y café de especialidad. Combo Mañanero desde $110. Desde las 9:00.</p>
+        <p style="margin-top:8px;font-style:italic;opacity:.9">"Tienen que probar los huevos Kieto" — Claudia, julio 2026</p>
       </div>
     </div>
     <a class="btn" href="https://maps.app.goo.gl/Vh9Qiyk9g34GJAvc7" target="_blank" rel="noopener">Pasa mañana</a>
@@ -477,5 +614,15 @@ section{padding:88px 0}
   </div>
 </footer>
 
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.tab-btn').forEach(function(x){x.classList.remove('act')});
+    document.querySelectorAll('.carta-panel').forEach(function(p){p.classList.remove('act')});
+    b.classList.add('act');
+    document.getElementById(b.dataset.panel).classList.add('act');
+  });
+});
+</script>
 </body>
 </html>
